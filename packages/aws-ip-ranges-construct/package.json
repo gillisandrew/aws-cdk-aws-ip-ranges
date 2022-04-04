@@ -1,5 +1,11 @@
 {
   "name": "aws-ip-ranges-construct",
+  "author": "Andrew Gillis <gillis.andrew@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gillisandrew/aws-ip-ranges-construct.git"
+  },
+  "homepage": "https://github.com/gillisandrew/aws-ip-ranges-construct",
   "version": "0.1.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
