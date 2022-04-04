@@ -6,7 +6,7 @@
     "url": "https://github.com/gillisandrew/aws-ip-ranges-construct.git"
   },
   "homepage": "https://github.com/gillisandrew/aws-ip-ranges-construct",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
