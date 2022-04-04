@@ -9,7 +9,8 @@
   "keywords": [
     "aws",
     "cdk",
-    "constructs"
+    "constructs",
+    "aws-cdk"
   ],
   "version": "0.1.2",
   "main": "lib/index.js",
