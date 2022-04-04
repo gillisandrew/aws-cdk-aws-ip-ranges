@@ -1,6 +1,3 @@
-/**
- * TODO: Figure out if I can just import aws-cdk-lib/logging
- */
 import { Writable } from 'stream';
 import * as util from 'util';
 import * as chalk from 'chalk';

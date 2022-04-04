@@ -1,12 +1,35 @@
-# Welcome to your CDK TypeScript Construct Library project
+# AWS IP Range Lookup Constructs
 
-You should explore the contents of this project. It demonstrates a CDK Construct Library that includes a construct (`AwsCdkAwsIpRange`)
-which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
+I built this little utility to easily filter the [published IP ranges](https://docs.aws.amazon.com/general/latest/gr/aws-ip-ranges.html) within an AWS CDK stack.
 
-The construct defines an interface (`AwsCdkAwsIpRangeProps`) to configure the visibility timeout of the queue.
+## Installation
 
-## Useful commands
+```sh
+npm i aws-ip-ranges-construct
+```
 
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
+## Usage
+
+### Example
+
+Add a security group rule to enable EC2 instance connect in the current region. Refer to [REFERENCE.md](./REFERENCE.md) to view some possible values.
+
+```typescript
+import { AwsIpRanges } from "aws-ip-ranges-construct";
+// In your stack or construct
+const ec2ConnectRanges = new AwsIpRanges(this, "EC2ConnectIpRanges", {
+  regions: [Stack.of(this).region],
+  services: ["EC2_INSTANCE_CONNECT"],
+});
+
+// Use in a security group rule
+ec2ConnectRanges.prefixes.forEach(({ ipPrefix }) => {
+  securityGroup.addIngressRule(Peer.ipv4(ipPrefix), Port.tcp(22));
+});
+```
+
+### Handling Deterministic Builds
+
+By default, the IP ranges will be downloaded every time the stack is synthesized. To change this behavior you can set the `aws-ip-ranges/json-file` [context value](https://docs.aws.amazon.com/cdk/v2/guide/context.html) to a path in your project. The construct will attempt to read from the file, if it does not exist it will be created.
+
+To ensure your stack is synthesized the same, regardless of any changes AWS makes to the list, you should commit this file to source control.
