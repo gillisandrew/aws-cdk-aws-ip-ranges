@@ -1,6 +1,6 @@
 import * as https from 'https';
 import * as fs from 'fs';
-import { sleep } from 'deasync';
+import * as deasync from 'deasync';
 import { debug, success, warning } from './logging';
 
 export class IpRangesJsonData {
@@ -11,13 +11,6 @@ export class IpRangesJsonData {
     protected static data?: string;
 
     private constructor() { }
-
-    private static wait(check: () => boolean) {
-        const limit = Date.now() + this.timeout;
-        while (Date.now() < limit && !check()) {
-            sleep(this.tick);
-        }
-    }
 
     public static download(path?: string) {
         const chunks: string[] = []
@@ -37,8 +30,7 @@ export class IpRangesJsonData {
                     throw new Error('An error occured fetching ip-ranges.json data')
                 })
             })
-
-        this.wait(() => !!this.data)
+        deasync.loopWhile(() => !this.data)
     }
 
     private static load(path: string) {
