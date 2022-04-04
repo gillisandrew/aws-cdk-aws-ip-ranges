@@ -1,3 +1,9 @@
+/**
+ * Logging utilities taken from
+ * https://github.com/aws/aws-cdk/blob/16d293d028b491743a9b6520086181efc1e00193/packages/aws-cdk/lib/logging.ts
+ * 
+ * Which is licensed under Apache-2.0
+ */
 import { Writable } from 'stream';
 import * as util from 'util';
 import * as chalk from 'chalk';
