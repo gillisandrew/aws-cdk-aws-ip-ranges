@@ -1,20 +1,28 @@
+import { ContextProvider, Stack, Token } from 'aws-cdk-lib';
 import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import { AwsIpRangeContextResponse, PrefixList } from './types';
 
-export interface AwsCdkAwsIpRangeProps {
-  // Define construct properties here
+export interface AwsIpRangeProps {
+  regions?: string[];
+  services?: string[];
+  networkBorderGroups?: string[];
 }
 
-export class AwsCdkAwsIpRange extends Construct {
-
-  constructor(scope: Construct, id: string, props: AwsCdkAwsIpRangeProps = {}) {
+export class AwsIpRange extends Construct {
+  public prefixes: PrefixList
+  constructor(scope: Construct, id: string, props: AwsIpRangeProps) {
     super(scope, id);
-
-    // Define construct contents here
-
-    // example resource
-    // const queue = new sqs.Queue(this, 'AwsCdkAwsIpRangeQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    this.prefixes = ContextProvider.getValue(scope, {
+      provider: 'aws-ip-range',
+      props: { ...props },
+      dummyValue: {
+        prefixes: [{
+          ip_prefix: 'NONE',
+          region: 'NONE',
+          network_border_group: 'NONE',
+          service: 'NONE',
+        }]
+      } as AwsIpRangeContextResponse,
+    }).value;
   }
 }

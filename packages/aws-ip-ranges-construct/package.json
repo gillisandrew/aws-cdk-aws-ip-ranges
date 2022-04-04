@@ -20,5 +20,8 @@
   "peerDependencies": {
     "aws-cdk-lib": "2.18.0",
     "constructs": "^10.0.0"
+  },
+  "dependencies": {
+    "@aws-cdk/cx-api": "^2.19.0"
   }
 }
