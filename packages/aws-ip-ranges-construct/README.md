@@ -24,7 +24,7 @@ const ec2ConnectRanges = new AwsIpRanges(this, "EC2ConnectIpRanges", {
 
 // Use in a security group rule
 ec2ConnectRanges.prefixes.forEach(({ ipPrefix }) => {
-  securityGroup.addIngressRule(Peer.ipv4(ipPrefix), Port.tcp(22));
+  securityGroup.addIngressRule(ec2.Peer.ipv4(ipPrefix), ec2.Port.tcp(22));
 });
 ```
 
