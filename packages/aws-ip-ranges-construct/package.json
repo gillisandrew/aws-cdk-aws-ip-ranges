@@ -6,6 +6,11 @@
     "url": "https://github.com/gillisandrew/aws-ip-ranges-construct.git"
   },
   "homepage": "https://github.com/gillisandrew/aws-ip-ranges-construct",
+  "keywords": [
+    "aws",
+    "cdk",
+    "constructs"
+  ],
   "version": "0.1.1",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
