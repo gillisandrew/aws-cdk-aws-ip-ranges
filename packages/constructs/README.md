@@ -36,17 +36,17 @@ possible values.
 import { AwsIpRanges } from "aws-ip-ranges-construct";
 // Create in your stack or construct
 const ec2ConnectRanges = new AwsIpRanges(this, "EC2ConnectIpRanges", {
-    regions: [Stack.of(this).region],
-    services: ["EC2_INSTANCE_CONNECT"],
+  regions: [Stack.of(this).region],
+  services: ["EC2_INSTANCE_CONNECT"],
 });
 
 // Use in a security group rule
 ec2ConnectRanges.ipv4.forEach(({ prefix }) => {
-    securityGroup.addIngressRule(ec2.Peer.ipv4(prefix), ec2.Port.tcp(22));
+  securityGroup.addIngressRule(ec2.Peer.ipv4(prefix), ec2.Port.tcp(22));
 });
 ```
 
-### L2 PrefixList Construct
+### L2 AwsServicePrefixList Construct
 
 ```ts
 import { Resource } from "aws-cdk-lib";
@@ -55,43 +55,38 @@ import { Construct } from "constructs";
 import { AwsIpRanges } from "./AwsIpRanges";
 
 export interface AwsServicePrefixListProps {
-    prefixListName: string;
-    addressFamily: "IPv4" | "IPv6";
-    service: string;
-    regions?: string[];
+  prefixListName: string;
+  addressFamily: "IPv4" | "IPv6";
+  service: string;
+  regions?: string[];
 }
 
 export class AwsServicePrefixList extends Resource {
-    public readonly prefixList: CfnPrefixList;
+  public readonly prefixList: CfnPrefixList;
 
-    public readonly prefixListId: string;
+  public readonly prefixListId: string;
 
-    constructor(
-        scope: Construct,
-        id: string,
-        props: AwsServicePrefixListProps
-    ) {
-        super(scope, id);
+  constructor(scope: Construct, id: string, props: AwsServicePrefixListProps) {
+    super(scope, id);
 
-        const ranges = new AwsIpRanges(scope, "AwsServiceRange", {
-            regions: props.regions || [],
-            services: [props.service],
-        });
+    const ranges = new AwsIpRanges(scope, "AwsServiceRange", {
+      regions: props.regions || [],
+      services: [props.service],
+    });
 
-        const range =
-            props.addressFamily === "IPv6" ? ranges.ipv6 : ranges.ipv4;
+    const range = props.addressFamily === "IPv6" ? ranges.ipv6 : ranges.ipv4;
 
-        this.prefixList = new CfnPrefixList(this, "Resource", {
-            prefixListName: props.prefixListName,
-            addressFamily: props.addressFamily,
-            maxEntries: range.length,
-            entries: range.map(({ prefix: cidr }) => ({
-                cidr,
-            })),
-        });
+    this.prefixList = new CfnPrefixList(this, "Resource", {
+      prefixListName: props.prefixListName,
+      addressFamily: props.addressFamily,
+      maxEntries: range.length,
+      entries: range.map(({ prefix: cidr }) => ({
+        cidr,
+      })),
+    });
 
-        this.node.defaultChild = this.prefixList;
-    }
+    this.node.defaultChild = this.prefixList;
+  }
 }
 ```
 
