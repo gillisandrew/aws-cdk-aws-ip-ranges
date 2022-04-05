@@ -1,7 +1,6 @@
 import * as https from 'https'
 
 import { ContextProviderPlugin } from "aws-cdk/lib/api/plugin";
-import { GetContextKeyOptions, GetContextKeyResult, Token } from "aws-cdk-lib";
 import { AwsIpRangesQuery, AwsIpRangesResult, Prefix } from "./types";
 
 interface IpRangesData {
@@ -49,41 +48,11 @@ export class AwsIpRangesContextProvider implements ContextProviderPlugin {
     }
 
     private applyFilters(list: IpRangesPrefixList, { services, regions, networkBorderGroups }: AwsIpRangesQuery) {
-        return list.filter(({ service, region, network_border_group }) => {
-            if (services.length > 0 && !services.includes(service))
-                return false;
-            if (regions.length > 0 && !regions.includes(region))
-                return false;
-            if (networkBorderGroups.length > 0 && !networkBorderGroups.includes(network_border_group))
-                return false;
-            return true
-        })
-    }
-
-    private getPropsString(props: AwsIpRangesQuery): string {
-        return [
-            `:services=`,
-            props.services.sort((a, b) => a.localeCompare(b)).join(','),
-            `:regions=`,
-            props.regions.sort((a, b) => a.localeCompare(b)).join(','),
-            `:networkBorderGroups=`,
-            props.networkBorderGroups.sort((a, b) => a.localeCompare(b)).join(','),
-        ].join('')
-    }
-
-    public getKey(scope: any, options: GetContextKeyOptions): GetContextKeyResult {
-        const props = options.props as AwsIpRangesQuery
-
-        if (Object.values(props).find(x => Token.isUnresolved(x))) {
-            throw new Error(
-                `Cannot determine scope for context provider ${options.provider}.\n` +
-                'This usually happens when one or more of the provider props have unresolved tokens');
-        }
-
-        return {
-            key: `${options.provider}${this.getPropsString(props)}`,
-            props,
-        };
+        return list.filter(({ service, region, network_border_group }) =>
+            (services.length === 0 || services.includes(service)) &&
+            (regions.length === 0 || regions.includes(region)) &&
+            (networkBorderGroups.length === 0 || networkBorderGroups.includes(network_border_group))
+        )
     }
 
     public async getValue(args: AwsIpRangesQuery): Promise<AwsIpRangesResult> {

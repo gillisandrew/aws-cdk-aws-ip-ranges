@@ -5,7 +5,7 @@ I built this little utility to easily filter the [published IP ranges](https://d
 ## Installation
 
 ```sh
-npm i aws-ip-ranges-construct
+npm i aws-ip-ranges-construct aws-ip-ranges-construct
 ```
 
 ## Usage

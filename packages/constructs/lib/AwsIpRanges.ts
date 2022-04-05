@@ -1,6 +1,7 @@
 import { Construct } from 'constructs';
 import type { AwsIpRangesQuery, AwsIpRangesResult, Prefix } from 'aws-ip-ranges-plugin/lib/types';
 import { ContextProvider } from 'aws-cdk-lib';
+
 import { AwsIpRangesPlugin } from 'aws-ip-ranges-plugin/lib/plugin';
 
 export type AwsIpRangesProps = Partial<AwsIpRangesQuery>
