@@ -1,7 +1,7 @@
 import { Resource } from 'aws-cdk-lib';
 import { CfnPrefixList } from 'aws-cdk-lib/aws-ec2';
 import { Construct } from 'constructs';
-import { AwsIpRanges } from './AwsIpRanges';
+import { AwsIpRanges } from '.';
 
 export interface AwsServicePrefixListProps {
   prefixListName: string;

@@ -1,5 +1,5 @@
 import { ContextProvider } from 'aws-cdk-lib';
-import { AwsIpRangesPlugin } from 'aws-ip-ranges-plugin/lib/plugin';
+import { AwsIpRangesPluginOptions } from 'aws-ip-ranges-plugin/lib/plugin';
 import type { AwsIpRangesResult, Prefix } from 'aws-ip-ranges-plugin/lib/types';
 import { Construct } from 'constructs';
 
@@ -54,28 +54,13 @@ export class AwsIpRanges extends Construct {
       ...props,
     };
 
-    Object.assign(this, ContextProvider.getValue(this, {
-      provider: 'plugin',
-      props: {
-        pluginName: AwsIpRangesPlugin.pluginName,
-        ...filters,
-      },
-      includeEnvironment: false,
-      dummyValue: {
-        ipv4: [{
-          prefix: '127.0.0.1/32',
-          service: 'PC2',
-          region: 'aa-bbbb-0',
-          networkBorderGroup: 'aa-bbbb-0',
-        }],
-        ipv6: [{
-          prefix: '::1/128',
-          service: 'PC2',
-          region: 'aa-bbbb-0',
-          networkBorderGroup: 'aa-bbbb-0',
-        }],
-      },
-    }).value as AwsIpRangesResult);
-
+    Object.assign(
+      this,
+      ContextProvider
+        .getValue(
+          this,
+          AwsIpRangesPluginOptions.filter(filters),
+        ).value as AwsIpRangesResult,
+    );
   }
 }

@@ -1,4 +1,3 @@
-import { existsSync } from 'fs';
 import * as cdk from 'aws-cdk-lib';
 import { AwsIpRanges } from '../lib/index';
 
@@ -9,7 +8,12 @@ let stack: cdk.Stack;
 
 beforeEach(() => {
   app = new cdk.App();
-  stack = new cdk.Stack(app, 'TestStack');
+  stack = new cdk.Stack(app, 'TestStack', {
+    env: {
+      region: 'us-east-1',
+      account: '12345678910',
+    },
+  });
 });
 
 test('It handles optional props.', () => {
