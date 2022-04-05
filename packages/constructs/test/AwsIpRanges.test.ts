@@ -1,5 +1,5 @@
-import * as cdk from 'aws-cdk-lib';
 import { existsSync } from 'fs';
+import * as cdk from 'aws-cdk-lib';
 import { AwsIpRanges } from '../lib/index';
 
 // example test. To run these tests, uncomment this file along with the
@@ -8,10 +8,10 @@ let app: cdk.App;
 let stack: cdk.Stack;
 
 beforeEach(() => {
-    app = new cdk.App()
-    stack = new cdk.Stack(app, 'TestStack')
-})
+  app = new cdk.App();
+  stack = new cdk.Stack(app, 'TestStack');
+});
 
 test('It handles optional props.', () => {
-    new AwsIpRanges(stack, 'MyTestConstruct');
+  new AwsIpRanges(stack, 'MyTestConstruct');
 });

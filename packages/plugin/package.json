@@ -14,10 +14,6 @@
     "build": "tsc",
     "watch": "tsc -w"
   },
-  "devDependencies": {
-    "@types/node": "10.17.27",
-    "typescript": "~3.9.7"
-  },
   "peerDependencies": {
     "aws-cdk": "^2.0.0",
     "aws-sdk": "*"

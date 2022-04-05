@@ -1,1 +1,1 @@
-export * from './AwsIpRangesPlugin'
+export * from './AwsIpRangesPlugin';

@@ -1,2 +1,2 @@
-export * from './AwsIpRanges'
-export * from './AwsServicePrefixList'
+export * from './AwsIpRanges';
+export * from './AwsServicePrefixList';

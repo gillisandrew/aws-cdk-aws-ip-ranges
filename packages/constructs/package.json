@@ -1,40 +1,30 @@
 {
-  "name": "aws-ip-ranges-construct",
-  "author": "Andrew Gillis <gillis.andrew@gmail.com>",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/gillisandrew/aws-cdk-aws-ip-ranges.git"
-  },
-  "homepage": "https://github.com/gillisandrew/aws-cdk-aws-ip-ranges/tree/master/packages/constructs",
-  "keywords": [
-    "aws",
-    "cdk",
-    "constructs",
-    "aws-cdk"
-  ],
-  "version": "1.0.0",
-  "license": "Apache-2.0",
-  "main": "lib/index.js",
-  "types": "lib/index.d.ts",
-  "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
-    "test": "jest"
-  },
-  "devDependencies": {
-    "@types/deasync": "^0.1.2",
-    "@types/jest": "^26.0.10",
-    "@types/node": "^10.0.0",
-    "jest": "^26.4.2",
-    "ts-jest": "^26.2.0",
-    "typescript": "~3.9.7"
-  },
-  "peerDependencies": {
-    "aws-cdk-lib": "^2.0.0",
-    "constructs": "^10.0.0"
-  },
-  "dependencies": {
-    "aws-ip-ranges-plugin": "^1.0.0"
-  },
-  "gitHead": "fe8842ea861057243a0320069fd7283a5b2eda05"
+    "name": "aws-ip-ranges-construct",
+    "author": "Andrew Gillis <gillis.andrew@gmail.com>",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/gillisandrew/aws-cdk-aws-ip-ranges.git"
+    },
+    "homepage": "https://github.com/gillisandrew/aws-cdk-aws-ip-ranges/tree/master/packages/constructs",
+    "keywords": [
+        "aws",
+        "cdk",
+        "constructs",
+        "aws-cdk"
+    ],
+    "version": "1.0.0",
+    "license": "Apache-2.0",
+    "main": "lib/index.js",
+    "types": "lib/index.d.ts",
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc -w",
+        "test": "jest"
+    },
+    "dependencies": {
+        "aws-ip-ranges-plugin": "file:../plugin",
+        "aws-cdk-lib": "^2.0.0",
+        "constructs": "^10.0.0"
+    },
+    "gitHead": "fe8842ea861057243a0320069fd7283a5b2eda05"
 }
