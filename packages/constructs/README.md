@@ -8,7 +8,7 @@ within an AWS CDK stack.
 
 1. Install the construct and plugin
 
-```sh
+```bash
 npm i aws-ip-ranges-construct aws-ip-ranges-plugin
 ```
 
@@ -94,4 +94,4 @@ export class AwsServicePrefixList extends Resource {
 
 Like first-party context providers, lookups are cached in
 `cdk.context.json` of your CDK project. If you need reproducible
-builds, you should commit this file. to source control.
+builds, you should commit this file to source control.
