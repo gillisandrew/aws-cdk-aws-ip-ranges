@@ -1,12 +1,6 @@
-# Welcome to your CDK TypeScript Construct Library project
+# EXPERIMENTAL: AWS IP Ranges Context Provider Plugin
 
-You should explore the contents of this project. It demonstrates a CDK Construct Library that includes a construct (`AwsIpRangesPlugin`)
-which contains an Amazon SQS queue that is subscribed to an Amazon SNS topic.
+This is an experimental plugin to dynamically fetch and filter the
+published IP ranges for AWS services within a CDK app.
 
-The construct defines an interface (`AwsIpRangesPluginProps`) to configure the visibility timeout of the queue.
-
-## Useful commands
-
-* `npm run build`   compile typescript to js
-* `npm run watch`   watch for changes and compile
-* `npm run test`    perform the jest unit tests
+It is based off the example specified in the comments of the [plugins API](https://github.com/aws/aws-cdk/blob/16d293d028b491743a9b6520086181efc1e00193/packages/aws-cdk/lib/api/plugin/plugin.ts#L114)
