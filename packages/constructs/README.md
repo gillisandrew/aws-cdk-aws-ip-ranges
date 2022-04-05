@@ -14,11 +14,10 @@ npm i aws-ip-ranges-construct aws-ip-ranges-plugin
 
 2. Register the plugin in `cdk.json`
 
-```js
+```json
 {
   "app": "npx ts-node --prefer-ts-exts bin/app.ts",
-  "plugin": ["aws-ip-ranges-plugin"]
-  // ...
+  "plugins": ["aws-ip-ranges-plugin"]
 }
 ```
 
@@ -26,7 +25,7 @@ npm i aws-ip-ranges-construct aws-ip-ranges-plugin
 
 ### Example
 
-### Security Group Rule
+#### Security Group Rule
 
 Add a security group rule to enable EC2 instance connect in the
 current region. Refer to [REFERENCE.md](./REFERENCE.md) to view some
@@ -46,7 +45,7 @@ ec2ConnectRanges.ipv4.forEach(({ prefix }) => {
 });
 ```
 
-### L2 AwsServicePrefixList Construct
+#### L2 AwsServicePrefixList Construct
 
 ```ts
 import { Resource } from "aws-cdk-lib";

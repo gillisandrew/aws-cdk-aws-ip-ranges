@@ -1,9 +1,9 @@
 import { Resource } from 'aws-cdk-lib';
-import { CfnPrefixList } from 'aws-cdk-lib/aws-ec2';
+import { CfnPrefixList, CfnPrefixListProps } from 'aws-cdk-lib/aws-ec2';
 import { Construct } from 'constructs';
 import { AwsIpRanges } from '.';
 
-export interface AwsServicePrefixListProps {
+export interface AwsServicePrefixListProps extends Partial<CfnPrefixListProps> {
   prefixListName: string;
   addressFamily: 'IPv4' | 'IPv6';
   service: string;

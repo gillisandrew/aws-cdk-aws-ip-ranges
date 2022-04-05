@@ -1,7 +1,6 @@
-import * as https from 'https';
-
 import type { ContextProviderPlugin } from 'aws-cdk/lib/api/plugin';
 import type { AwsIpRangesQuery, AwsIpRangesResult, Prefix } from './types';
+import { get } from './utils';
 
 interface IpRangesData {
   syncToken: string;
@@ -37,23 +36,8 @@ export class AwsIpRangesContextProvider implements ContextProviderPlugin {
 
   private static data?: IpRangesData;
 
-  private static fetchIpRangesJson(): Promise<IpRangesData> {
-    return new Promise((resolve, reject) => {
-      const chunks: string[] = [];
-      https.get(AwsIpRangesContextProvider.ipRangesUrl,
-        (message) => {
-          message.on('data', (chunk) => {
-            chunks.push(chunk);
-          });
-          message.on('close', () => {
-            const data = JSON.parse(chunks.join('')) as IpRangesData;
-            resolve(data);
-          });
-          message.on('error', () => {
-            reject(new Error('An error occured fetching ip-ranges.json data'));
-          });
-        });
-    });
+  private static async fetchIpRangesJson(): Promise<IpRangesData> {
+    return JSON.parse(await get(AwsIpRangesContextProvider.ipRangesUrl)) as IpRangesData;
   }
 
   private static filter(arr: AwsIpRangesQuery[keyof AwsIpRangesQuery], value: string) {
@@ -63,8 +47,8 @@ export class AwsIpRangesContextProvider implements ContextProviderPlugin {
   private static applyFilters(list: IpRangesPrefixList, { services, regions, networkBorderGroups }: AwsIpRangesQuery) {
     return list.filter(({ service, region, network_border_group }) =>
       AwsIpRangesContextProvider.filter(services, service) &&
-            AwsIpRangesContextProvider.filter(regions, region) &&
-            AwsIpRangesContextProvider.filter(networkBorderGroups, network_border_group),
+      AwsIpRangesContextProvider.filter(regions, region) &&
+      AwsIpRangesContextProvider.filter(networkBorderGroups, network_border_group),
     );
   }
 

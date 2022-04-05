@@ -1,6 +1,7 @@
 {
   "name": "aws-ip-ranges-construct",
   "author": "Andrew Gillis <gillis.andrew@gmail.com>",
+  "description": "A simple construct to filter the published AWS IP ranges within an AWS CDK stack.",
   "repository": {
     "type": "git",
     "url": "https://github.com/gillisandrew/aws-cdk-aws-ip-ranges.git"

@@ -1,6 +1,9 @@
 {
     "name": "root",
     "private": true,
+    "workspaces": [
+        "packages/*"
+    ],
     "scripts": {
         "lint": "eslint ./**/*.ts",
         "lint:fix": "npm run lint -- --fix"

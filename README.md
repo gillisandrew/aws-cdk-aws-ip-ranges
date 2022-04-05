@@ -1,4 +1,4 @@
-# AWS CDK AWS IP Ranges Utilities
+# AWS CDK utilities for AWS IP ranges
 
 [![lerna](https://img.shields.io/badge/maintained%20with-lerna-cc00ff.svg)](https://lerna.js.org/)
 

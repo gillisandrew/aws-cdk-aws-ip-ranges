@@ -2,14 +2,14 @@ import type { GetContextValueOptions } from 'aws-cdk-lib';
 import { AwsIpRangesPlugin } from './plugin';
 import { AwsIpRangesQuery } from './types';
 
-export abstract class AwsIpRangesPluginOptions implements GetContextValueOptions {
+export class AwsIpRangesPluginOptions implements GetContextValueOptions {
 
   public static filter(filters: AwsIpRangesQuery): AwsIpRangesPluginOptions {
     return new AwsIpRangesPluginOptions(filters);
   }
 
   public static filterRegions(filter: AwsIpRangesQuery['regions']): AwsIpRangesPluginOptions {
-    return new AwsIpRangesPluginOptions({
+    return AwsIpRangesPluginOptions.filter({
       regions: filter,
       services: [],
       networkBorderGroups: [],
