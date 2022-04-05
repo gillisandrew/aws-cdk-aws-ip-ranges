@@ -3,9 +3,9 @@
   "author": "Andrew Gillis <gillis.andrew@gmail.com>",
   "repository": {
     "type": "git",
-    "url": "https://github.com/gillisandrew/aws-ip-ranges-construct.git"
+    "url": "https://github.com/gillisandrew/aws-cdk-aws-ip-ranges.git"
   },
-  "homepage": "https://github.com/gillisandrew/aws-ip-ranges-construct",
+  "homepage": "https://github.com/gillisandrew/aws-cdk-aws-ip-ranges/tree/master/packages/constructs",
   "keywords": [
     "aws",
     "cdk",

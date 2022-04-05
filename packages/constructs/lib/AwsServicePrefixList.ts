@@ -37,6 +37,4 @@ export class AwsServicePrefixList extends Resource {
 
         this.node.defaultChild = this.prefixList;
     }
-
-
 }
