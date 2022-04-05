@@ -14,10 +14,12 @@
   },
   "peerDependencies": {
     "aws-cdk": "^2.0.0",
+    "aws-cdk-lib": "^2.0.0",
     "aws-sdk": "*"
   },
   "exports": {
     ".": "./lib/index.js",
-    "./lib/types": "./lib/types.js"
+    "./lib/types": "./lib/types.js",
+    "./lib/plugin": "./lib/AwsIpRangesPlugin.js"
   }
 }
