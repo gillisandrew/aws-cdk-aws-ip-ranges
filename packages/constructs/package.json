@@ -35,5 +35,6 @@
   },
   "dependencies": {
     "aws-ip-ranges-plugin": "^0.1.0"
-  }
+  },
+  "gitHead": "fe8842ea861057243a0320069fd7283a5b2eda05"
 }
