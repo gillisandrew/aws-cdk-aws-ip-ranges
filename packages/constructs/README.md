@@ -52,7 +52,7 @@ ec2ConnectRanges.ipv4.forEach(({ prefix }) => {
 import { Resource } from "aws-cdk-lib";
 import { CfnPrefixList } from "aws-cdk-lib/aws-ec2";
 import { Construct } from "constructs";
-import { AwsIpRanges } from "./AwsIpRanges";
+import { AwsIpRanges } from "aws-ip-ranges-construct";
 
 export interface AwsServicePrefixListProps {
   prefixListName: string;
