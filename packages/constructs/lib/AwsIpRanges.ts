@@ -1,5 +1,5 @@
 import { ContextProvider } from 'aws-cdk-lib';
-import { AwsIpRangesPluginOptions } from 'aws-ip-ranges-plugin/lib/plugin';
+import * as plugin from 'aws-ip-ranges-plugin';
 import type { AwsIpRangesResult, Prefix } from 'aws-ip-ranges-plugin/lib/types';
 import { Construct } from 'constructs';
 
@@ -59,7 +59,7 @@ export class AwsIpRanges extends Construct {
       ContextProvider
         .getValue(
           this,
-          AwsIpRangesPluginOptions.filter(filters),
+          plugin.query(filters),
         ).value as AwsIpRangesResult,
     );
   }

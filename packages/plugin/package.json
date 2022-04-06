@@ -21,7 +21,6 @@
   },
   "exports": {
     ".": "./lib/index.js",
-    "./lib/types": "./lib/types.js",
-    "./lib/plugin": "./lib/plugin.js"
+    "./lib/types": "./lib/types.js"
   }
 }

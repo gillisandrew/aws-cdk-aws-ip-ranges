@@ -32,7 +32,6 @@ function isIpv4Prefix(prefix: IpRangesPrefix): boolean {
 export class AwsIpRangesContextProvider implements ContextProviderPlugin {
 
   private static ipRangesUrl: string = 'https://ip-ranges.amazonaws.com/ip-ranges.json';
-
   private static data?: IpRangesData;
 
   private static async fetchIpRangesJson(): Promise<IpRangesData> {

@@ -1,35 +1,5 @@
-import { AwsIpRangesPlugin } from './plugin';
 import { AwsIpRangesQuery } from './types';
-
 export class AwsIpRangesPluginOptions {
-
-  public static filter(filters: AwsIpRangesQuery): AwsIpRangesPluginOptions {
-    return new AwsIpRangesPluginOptions(filters);
-  }
-
-  public static filterRegions(filter: AwsIpRangesQuery['regions']): AwsIpRangesPluginOptions {
-    return AwsIpRangesPluginOptions.filter({
-      regions: filter,
-      services: [],
-      networkBorderGroups: [],
-    });
-  }
-
-  public static filterServices(filter: AwsIpRangesQuery['services']): AwsIpRangesPluginOptions {
-    return AwsIpRangesPluginOptions.filter({
-      regions: [],
-      services: filter,
-      networkBorderGroups: [],
-    });
-  }
-
-  public static filterNetworkBorderGroups(filter: AwsIpRangesQuery['networkBorderGroups']): AwsIpRangesPluginOptions {
-    return AwsIpRangesPluginOptions.filter({
-      regions: [],
-      services: [],
-      networkBorderGroups: filter,
-    });
-  }
 
   dummyValue = {
     ipv4: [{
@@ -49,9 +19,9 @@ export class AwsIpRangesPluginOptions {
   includeEnvironment = false;
   props: any;
 
-  private constructor(filters: AwsIpRangesQuery) {
+  constructor(filters: AwsIpRangesQuery) {
     this.props = {
-      pluginName: AwsIpRangesPlugin.pluginName,
+      pluginName: 'aws-ip-ranges-plugin',
       ...filters,
     };
   }
