@@ -5,9 +5,10 @@
     "packages/*"
   ],
   "scripts": {
-    "lint": "eslint --ext .ts .",
+    "lint": "eslint packages/ --ext .ts .",
     "lint:fix": "npm run lint -- --fix",
-    "format": "prettier --write 'packages/*/*.ts' 'packages/*/!(node_modules)/**/*.ts'"
+    "format": "prettier --write 'packages/*/*.ts' 'packages/*/!(node_modules)/**/*.ts'",
+    "postinstall": "husky install"
   },
   "devDependencies": {
     "@types/jest": "^26.0.10",
@@ -22,10 +23,10 @@
     "lerna-changelog": "^2.2.0",
     "lint-staged": "^12.3.7",
     "ts-jest": "^26.2.0",
-    "typescript": "~3.9.7"
+    "typescript": "~3.9.7",
+    "husky": "^7.0.4"
   },
   "dependencies": {
-    "husky": "^7.0.4",
     "prettier": "^2.6.2"
   },
   "husky": {
@@ -34,8 +35,11 @@
     }
   },
   "lint-staged": {
-    "*.{js,json,yml,yaml,css,scss,ts,tsx,md}": [
+    "*.{js,json,yml,yaml,ts,md}": [
       "prettier --write"
+    ],
+    "*.{js,ts}": [
+      "eslint --fix"
     ]
   }
 }
