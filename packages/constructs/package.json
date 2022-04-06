@@ -13,7 +13,7 @@
     "constructs",
     "aws-cdk"
   ],
-  "version": "1.1.1",
+  "version": "1.2.0",
   "license": "Apache-2.0",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -24,7 +24,7 @@
   },
   "dependencies": {
     "aws-cdk-lib": "^2.0.0",
-    "aws-ip-ranges-plugin": "^1.1.1",
+    "aws-ip-ranges-plugin": "^1.2.0",
     "constructs": "^10.0.0"
   }
 }
