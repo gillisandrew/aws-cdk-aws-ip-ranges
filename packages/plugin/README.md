@@ -26,7 +26,7 @@ npm i aws-ip-ranges-construct aws-ip-ranges-plugin
 
 ```ts
 import { ContextProvider } from "aws-cdk-lib";
-import { AwsIpRangesPluginOptions } from "aws-ip-ranges-plugin/lib/plugin";
+import { query } from "aws-ip-ranges-plugin";
 import type { AwsIpRangesResult } from "aws-ip-ranges-plugin/lib/types";
 
 const filters = {
@@ -36,6 +36,6 @@ const filters = {
 
 const ranges = ContextProvider.getValue(
   this,
-  AwsIpRangesPluginOptions.filter(filters)
+  query(filters)
 ).value as AwsIpRangesResult;
 ```

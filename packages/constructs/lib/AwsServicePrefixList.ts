@@ -6,7 +6,15 @@ import { AwsIpRanges } from '.';
 export interface AwsServicePrefixListProps extends Partial<CfnPrefixListProps> {
   prefixListName: string;
   addressFamily: 'IPv4' | 'IPv6';
+  /**
+   * The AWS service you wish to create the prefix list for.
+   * @example "S3"
+   */
   service: string;
+  /**
+   * Regions to scope the ip ranges to.
+   * @example [Stack.of(this).region] // Current region only
+   */
   regions?: string[]
 }
 
@@ -36,5 +44,6 @@ export class AwsServicePrefixList extends Resource {
     });
 
     this.node.defaultChild = this.prefixList;
+    this.prefixListId = this.prefixList.ref;
   }
 }

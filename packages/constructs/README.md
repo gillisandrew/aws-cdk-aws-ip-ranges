@@ -73,13 +73,13 @@ export class AwsServicePrefixList extends Resource {
       services: [props.service],
     });
 
-    const range = props.addressFamily === "IPv6" ? ranges.ipv6 : ranges.ipv4;
+    const list = props.addressFamily === "IPv6" ? ranges.ipv6 : ranges.ipv4;
 
     this.prefixList = new CfnPrefixList(this, "Resource", {
       prefixListName: props.prefixListName,
       addressFamily: props.addressFamily,
-      maxEntries: range.length,
-      entries: range.map(({ prefix: cidr }) => ({
+      maxEntries: list.length,
+      entries: list.map(({ prefix: cidr }) => ({
         cidr,
       })),
     });
