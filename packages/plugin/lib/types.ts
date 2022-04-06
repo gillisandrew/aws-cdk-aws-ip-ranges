@@ -1,12 +1,12 @@
 export interface AwsIpRangesQuery {
-  regions: string[];
-  services: string[];
-  networkBorderGroups: string[];
+  regions: string[]
+  services: string[]
+  networkBorderGroups: string[]
 }
 
 export interface AwsIpRangesResult {
-  ipv4: Prefix[],
-  ipv6: Prefix[],
+  ipv4: Prefix[]
+  ipv6: Prefix[]
 }
 
 export interface Prefix {

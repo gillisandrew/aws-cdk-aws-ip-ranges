@@ -26,6 +26,7 @@ module.exports = {
     extends: [
         'plugin:import/typescript',
         'plugin:jest/recommended',
+        'prettier'
     ],
     settings: {
         'import/parsers': {

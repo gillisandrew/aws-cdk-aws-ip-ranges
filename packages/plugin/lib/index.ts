@@ -1,2 +1,2 @@
 import { AwsIpRangesPlugin } from './AwsIpRangesPlugin';
-export = new AwsIpRangesPlugin();
+export = new AwsIpRangesPlugin()

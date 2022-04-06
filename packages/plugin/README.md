@@ -25,17 +25,15 @@ npm i aws-ip-ranges-construct aws-ip-ranges-plugin
 ## Usage
 
 ```ts
-import { ContextProvider } from "aws-cdk-lib";
-import { query } from "aws-ip-ranges-plugin";
-import type { AwsIpRangesResult } from "aws-ip-ranges-plugin/lib/types";
+import { ContextProvider } from 'aws-cdk-lib'
+import { query } from 'aws-ip-ranges-plugin'
+import type { AwsIpRangesResult } from 'aws-ip-ranges-plugin/lib/types'
 
 const filters = {
-  regions: ["us-east-1"],
-  services: ["EC2_INSTANCE_CONNECT"],
-};
+  regions: ['us-east-1'],
+  services: ['EC2_INSTANCE_CONNECT'],
+}
 
-const ranges = ContextProvider.getValue(
-  this,
-  query(filters)
-).value as AwsIpRangesResult;
+const ranges = ContextProvider.getValue(this, query(filters))
+  .value as AwsIpRangesResult
 ```
