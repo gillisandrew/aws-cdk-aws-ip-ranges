@@ -29,7 +29,7 @@ importers:
   packages/constructs:
     specifiers:
       aws-cdk-lib: ^2.0.0
-      aws-ip-ranges-plugin: workspace:*
+      aws-ip-ranges-plugin: ^1.1.0
       constructs: ^10.0.0
     dependencies:
       aws-cdk-lib: 2.19.0_constructs@10.0.106
