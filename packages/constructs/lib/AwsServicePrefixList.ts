@@ -12,7 +12,7 @@ export interface AwsServicePrefixListProps extends Partial<CfnPrefixListProps> {
    */
   service: string;
   /**
-   * Regions to scope the ip ranges to.
+   * Regions to scope the ip ranges to. Omit or pass an empty array to get all regions.
    * @example [Stack.of(this).region] // Current region only
    */
   regions?: string[]

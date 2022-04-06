@@ -16,7 +16,7 @@
     "watch": "tsc -w"
   },
   "dependencies": {
-    "aws-cdk": "^2.0.0"
+    "aws-cdk": "^2.2.0"
   },
   "exports": {
     ".": "./lib/index.js",
