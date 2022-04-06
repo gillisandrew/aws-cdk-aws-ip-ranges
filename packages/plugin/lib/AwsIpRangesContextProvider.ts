@@ -1,7 +1,7 @@
 import type { ContextProviderPlugin } from 'aws-cdk/lib/api/plugin';
+import { debug, error } from 'aws-cdk/lib/logging';
 import type { AwsIpRangesQuery, AwsIpRangesResult, Prefix } from './types';
 import { get } from './utils';
-
 interface IpRangesData {
   syncToken: string
   createDate: string
@@ -30,48 +30,65 @@ function isIpv4Prefix(prefix: IpRangesPrefix): boolean {
   return typeof prefix.ip_prefix === 'string';
 }
 export class AwsIpRangesContextProvider implements ContextProviderPlugin {
-  private static ipRangesUrl: string =
-    'https://ip-ranges.amazonaws.com/ip-ranges.json';
-  private static data?: IpRangesData;
+  protected ipRangesUrl: string = 'https://ip-ranges.amazonaws.com/ip-ranges.json';
+  protected data: Promise<IpRangesData>;
 
-  private static async fetchIpRangesJson(): Promise<IpRangesData> {
-    return JSON.parse(
-      await get(AwsIpRangesContextProvider.ipRangesUrl),
-    ) as IpRangesData;
+  constructor() {
+    this.data = this.fetchIpRangesJson();
   }
 
-  private static filter(
-    arr: AwsIpRangesQuery[keyof AwsIpRangesQuery],
+  private async fetchIpRangesJson(): Promise<IpRangesData> {
+    debug('Fetching latest ip-ranges.json from https://ip-ranges.amazonaws.com/ip-ranges.json');
+    try {
+      return JSON.parse(
+        await get(this.ipRangesUrl),
+      ) as IpRangesData;
+    } catch (e) {
+      error('An error occured fetching the latest ip-ranges.json');
+      throw e;
+    }
+  }
+
+  private filter(
+    arr: string[],
     value: string,
   ) {
     return arr.length === 0 || arr.includes(value);
   }
 
-  private static applyFilters(
+  private applyFilters(
     list: IpRangesPrefixList,
     { services, regions, networkBorderGroups }: AwsIpRangesQuery,
   ) {
     return list.filter(
       ({ service, region, network_border_group }) =>
-        AwsIpRangesContextProvider.filter(services, service) &&
-        AwsIpRangesContextProvider.filter(regions, region) &&
-        AwsIpRangesContextProvider.filter(
+        this.filter(
+          services,
+          service,
+        ) &&
+        this.filter(
+          regions,
+          region,
+        ) &&
+        this.filter(
           networkBorderGroups,
           network_border_group,
         ),
     );
   }
 
-  private static mapToPrefix(item: IpRangesPrefix): Prefix {
+  private mapToPrefix(item: IpRangesPrefix): Prefix {
     const { network_border_group: networkBorderGroup, service, region } = item;
     let prefix: string;
+
     if (isIpv6Prefix(item)) {
       prefix = item.ipv6_prefix!;
     } else if (isIpv4Prefix(item)) {
       prefix = item.ip_prefix;
     } else {
-      throw new Error(`Could not map provided prefix. ${JSON.stringify(item)}`);
+      throw new Error('Could not map provided prefix.');
     }
+
     return {
       prefix,
       service,
@@ -80,20 +97,26 @@ export class AwsIpRangesContextProvider implements ContextProviderPlugin {
     };
   }
 
-  public async getValue(args: AwsIpRangesQuery): Promise<AwsIpRangesResult> {
-    AwsIpRangesContextProvider.data =
-      AwsIpRangesContextProvider.data ||
-      (await AwsIpRangesContextProvider.fetchIpRangesJson());
-    return {
-      ipv4: AwsIpRangesContextProvider.applyFilters(
-        AwsIpRangesContextProvider.data.prefixes,
-        args,
-      ).map(AwsIpRangesContextProvider.mapToPrefix),
+  public async getValue(query: AwsIpRangesQuery): Promise<AwsIpRangesResult> {
+    /**
+     * Fetch data if it is missing
+     */
+    this.data = this.data || (await this.fetchIpRangesJson());
+    const data = await this.data;
 
-      ipv6: AwsIpRangesContextProvider.applyFilters(
-        AwsIpRangesContextProvider.data.ipv6_prefixes,
-        args,
-      ).map(AwsIpRangesContextProvider.mapToPrefix),
+    /**
+     * Return normalized data
+     */
+    return {
+      syncToken: data.syncToken,
+      ipv4: this.applyFilters(
+        data.prefixes,
+        query,
+      ).map(this.mapToPrefix),
+      ipv6: this.applyFilters(
+        data.ipv6_prefixes,
+        query,
+      ).map(this.mapToPrefix),
     };
   }
 }

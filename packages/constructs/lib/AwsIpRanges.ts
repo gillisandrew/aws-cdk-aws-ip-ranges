@@ -39,6 +39,9 @@ export interface AwsIpRangesProps {
  * Instead it should be used to configure other resources with resolved IP values.
  */
 export class AwsIpRanges extends Construct {
+
+  public syncToken: string;
+
   public ipv4: Prefix[];
 
   public ipv6: Prefix[];

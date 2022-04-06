@@ -37,8 +37,9 @@ export class AwsServicePrefixList extends Resource {
       prefixListName: props.prefixListName,
       addressFamily: props.addressFamily,
       maxEntries: range.length,
-      entries: range.map(({ prefix: cidr }) => ({
+      entries: range.map<CfnPrefixList.EntryProperty>(({ prefix: cidr }) => ({
         cidr,
+        description: `ip-ranges.json@${ranges.syncToken}`,
       })),
     });
 
