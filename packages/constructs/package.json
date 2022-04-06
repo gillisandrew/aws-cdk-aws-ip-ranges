@@ -18,14 +18,13 @@
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
   "scripts": {
-    "prepublish": "npm run build",
     "build": "tsc",
     "watch": "tsc -w",
     "test": "jest"
   },
   "dependencies": {
     "aws-cdk-lib": "^2.0.0",
-    "aws-ip-ranges-plugin": "file:../plugin",
+    "aws-ip-ranges-plugin": "workspace:*",
     "constructs": "^10.0.0"
   },
   "gitHead": "fe8842ea861057243a0320069fd7283a5b2eda05"

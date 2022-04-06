@@ -1,8 +1,7 @@
-import type { GetContextValueOptions } from 'aws-cdk-lib';
 import { AwsIpRangesPlugin } from './plugin';
 import { AwsIpRangesQuery } from './types';
 
-export class AwsIpRangesPluginOptions implements GetContextValueOptions {
+export class AwsIpRangesPluginOptions {
 
   public static filter(filters: AwsIpRangesQuery): AwsIpRangesPluginOptions {
     return new AwsIpRangesPluginOptions(filters);

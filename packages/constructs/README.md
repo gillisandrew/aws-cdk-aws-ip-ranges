@@ -17,7 +17,7 @@ npm i aws-ip-ranges-construct aws-ip-ranges-plugin
 ```json
 {
   "app": "npx ts-node --prefer-ts-exts bin/app.ts",
-  "plugins": ["aws-ip-ranges-plugin"]
+  "plugin": ["aws-ip-ranges-plugin"]
 }
 ```
 

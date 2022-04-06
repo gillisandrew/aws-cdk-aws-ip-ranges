@@ -12,7 +12,6 @@
   "types": "lib/index.d.ts",
   "license": "Apache-2.0",
   "scripts": {
-    "prepublish": "npm run build",
     "build": "tsc",
     "watch": "tsc -w"
   },
