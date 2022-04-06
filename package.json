@@ -29,11 +29,6 @@
   "dependencies": {
     "prettier": "^2.6.2"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{js,json,yml,yaml,ts,md}": [
       "prettier --write"
