@@ -1,7 +1,7 @@
 *.js
 !jest.config.js
 *.d.ts
-node_modules/
+
 .cdk.staging/
 cdk.out/
-*-debug.log
+node_modules/
