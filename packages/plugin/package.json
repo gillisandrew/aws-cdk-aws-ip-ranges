@@ -23,6 +23,5 @@
     ".": "./lib/index.js",
     "./lib/types": "./lib/types.js",
     "./lib/plugin": "./lib/plugin.js"
-  },
-  "gitHead": "fe8842ea861057243a0320069fd7283a5b2eda05"
+  }
 }
