@@ -21,7 +21,6 @@ interface Ipv6Prefix extends IpRangesPrefix {
   ipv6_prefix: string
 }
 
-
 type IpRangesPrefixList = IpRangesPrefix[]
 
 function isIpv6Prefix(prefix: IpRangesPrefix): boolean {
