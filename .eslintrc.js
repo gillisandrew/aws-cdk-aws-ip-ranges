@@ -204,4 +204,4 @@ module.exports = {
         "jest/valid-title": "off", // A little over-zealous with test('test foo') being an error.
         "jest/no-identical-title": "off", // TEMPORARY - Disabling this until https://github.com/jest-community/eslint-plugin-jest/issues/836 is resolved
     },
-};
+}
